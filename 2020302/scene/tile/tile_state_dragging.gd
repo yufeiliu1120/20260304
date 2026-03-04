@@ -13,6 +13,7 @@ var state_name = "Dragging"
 var original_grid_pos: Vector2i
 var original_pixel_pos: Vector2
 var ghost_sprite: Sprite2D 
+var can_place_logical: bool = false
 
 @onready var sprite: Sprite2D = $"../../Sprite2D"
 @onready var shadow: Sprite2D = $"../../Shadow"
@@ -30,6 +31,7 @@ func do(_delta: float) -> void:
 	_apply_floating_animation()
 	_update_ghost_preview()
 	_handle_input()
+	
 func exit() -> void:
 	_setup_visuals_on_drag(false)
 	_cleanup_ghost()
@@ -83,7 +85,6 @@ func _apply_floating_animation() -> void:
 	sprite.position = Vector2(swaying, bobbing + SPRITE_DEFAULT_Y)
 	if shadow:
 		shadow.scale = IDLE_SCALE * (1.0 + bobbing * 0.02)
-
 # --- 虚影与放置逻辑 ---
 
 func _create_ghost() -> void:
@@ -108,6 +109,7 @@ func _update_ghost_preview() -> void:
 		ghost_sprite.visible = true
 		ghost_sprite.modulate = Color(1.0, 0.3, 0.3, 0.2) # 浅红色：禁止
 
+
 func _finalize_placement(grid_pos: Vector2i) -> void:
 	actor.grid_coordinate = grid_pos
 	var target_pos = GridAutoload.grid_to_pixel(grid_pos)
@@ -118,6 +120,7 @@ func _finalize_placement(grid_pos: Vector2i) -> void:
 	GridAutoload.register_tile(grid_pos, actor)
 	actor.update_connections()
 	state_finished.emit("Idle")
+
 
 func _play_dust_effect() -> void:
 	var dust = actor.get_node_or_null("DustParticles")
@@ -142,3 +145,6 @@ func _rollback_placement() -> void:
 func _cleanup_ghost() -> void:
 	if is_instance_valid(ghost_sprite):
 		ghost_sprite.queue_free()
+		
+
+		

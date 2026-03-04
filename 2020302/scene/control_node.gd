@@ -8,5 +8,4 @@ func set_mouse_is_dragging(status:bool):
 
 
 func _on_button_pressed() -> void:
-	ConnectivityManager.update_connectivity_and_distance()
-	print()
+	ConnectivityManager.update_connectivity()

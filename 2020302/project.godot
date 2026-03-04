@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 GridAutoload="*uid://detvmfpykpyn2"
 ConnectivityManager="*uid://epp2ummgim67"
 GameResourceManager="*uid://bjm2t7gmmprvq"
+SignalBusAutoload="*uid://bg2ir70futmya"
 
 [global_group]
 

@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://o1ohkgwopq4m"]
+
+[ext_resource type="Texture2D" uid="uid://bb3tsysle1uvt" path="res://assets/floor.png" id="1_5u11y"]
+[ext_resource type="Texture2D" uid="uid://ipt72vxnuga4" path="res://assets/table2.png" id="1_bp0px"]
+[ext_resource type="PackedScene" uid="uid://clyo0jh5xnybv" path="res://scene/tile.tscn" id="1_fghjm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5u11y"]
+size = Vector2(656, 370)
+
+[node name="Node2D" type="Node2D" unique_id=253995382]
+y_sort_enabled = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1637748102]
+z_index = -5
+position = Vector2(591, 355)
+scale = Vector2(5, 5)
+texture = ExtResource("1_5u11y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=706952562]
+z_index = -2
+position = Vector2(595, 387.00006)
+scale = Vector2(5, 5)
+texture = ExtResource("1_bp0px")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D" unique_id=142364469]
+position = Vector2(-0.6666667, -20.000011)
+zoom = Vector2(1.2, 1.2)
+
+[node name="Area2D15" parent="." unique_id=535793987 instance=ExtResource("1_fghjm")]
+position = Vector2(322, 127)
+
+[node name="tiles" type="Node2D" parent="." unique_id=1375518260]
+
+[node name="Area2D" parent="tiles" unique_id=1488174352 instance=ExtResource("1_fghjm")]
+position = Vector2(390, 186)
+
+[node name="Area2D2" parent="tiles" unique_id=614326466 instance=ExtResource("1_fghjm")]
+position = Vector2(656, 186)
+
+[node name="Area2D4" parent="tiles" unique_id=1622651982 instance=ExtResource("1_fghjm")]
+position = Vector2(552, 172)
+
+[node name="Area2D5" parent="tiles" unique_id=2031347176 instance=ExtResource("1_fghjm")]
+position = Vector2(523, 250)
+
+[node name="Area2D6" parent="tiles" unique_id=411997439 instance=ExtResource("1_fghjm")]
+position = Vector2(604, 298)
+
+[node name="Area2D7" parent="tiles" unique_id=585605594 instance=ExtResource("1_fghjm")]
+position = Vector2(737, 300)
+
+[node name="Area2D8" parent="tiles" unique_id=371353269 instance=ExtResource("1_fghjm")]
+position = Vector2(838, 215)
+
+[node name="Area2D9" parent="tiles" unique_id=1483622953 instance=ExtResource("1_fghjm")]
+position = Vector2(775, 139)
+
+[node name="Area2D10" parent="tiles" unique_id=1089554708 instance=ExtResource("1_fghjm")]
+position = Vector2(389, 307)
+
+[node name="Area2D11" parent="tiles" unique_id=1601225126 instance=ExtResource("1_fghjm")]
+position = Vector2(467, 369)
+
+[node name="Area2D12" parent="tiles" unique_id=1213706066 instance=ExtResource("1_fghjm")]
+position = Vector2(564, 392)
+
+[node name="Area2D13" parent="tiles" unique_id=182654599 instance=ExtResource("1_fghjm")]
+position = Vector2(680, 385)
+
+[node name="Area2D14" parent="tiles" unique_id=615552401 instance=ExtResource("1_fghjm")]
+position = Vector2(798, 381)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=958235382]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1857989890]
+position = Vector2(596, 276)
+shape = SubResource("RectangleShape2D_5u11y")

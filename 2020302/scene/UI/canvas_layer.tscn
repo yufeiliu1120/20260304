@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://d08ufqbsy3hm7"]
+
+[ext_resource type="Script" uid="uid://3nqluakori5c" path="res://scene/UI/ResourceBarUI.gd" id="1_jyuir"]
+[ext_resource type="Script" uid="uid://baqvokwta5voh" path="res://scene/UI/TileShop.gd" id="2_iuk4y"]
+[ext_resource type="PackedScene" uid="uid://dl7rgpxnmq3fe" path="res://scene/tile/Road.tscn" id="3_42qj3"]
+[ext_resource type="PackedScene" uid="uid://clyo0jh5xnybv" path="res://scene/tile.tscn" id="4_gwcwi"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1726276156]
+
+[node name="Control" type="Control" parent="." unique_id=289617592]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jyuir")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=281263782]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 27.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=1844264890]
+layout_mode = 2
+
+[node name="ResourceLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer" unique_id=2130060843]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=1589880965]
+layout_mode = 2
+
+[node name="Road_Tile" type="Button" parent="Control/VBoxContainer/HBoxContainer2" unique_id=173044331]
+layout_mode = 2
+text = "Road Tile"
+script = ExtResource("2_iuk4y")
+tile_scene = ExtResource("3_42qj3")
+
+[node name="tile_shop" type="Button" parent="Control/VBoxContainer/HBoxContainer2" unique_id=1706129446]
+layout_mode = 2
+text = "Test Tile"
+script = ExtResource("2_iuk4y")
+tile_scene = ExtResource("4_gwcwi")
+base_cost = {
+"food": 1,
+"stone": 1,
+"wood": 1
+}
+metadata/_custom_type_script = "uid://baqvokwta5voh"

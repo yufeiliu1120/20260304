@@ -44,3 +44,19 @@ func consume_resources(cost: Dictionary):
 	for res in cost:
 		stocks[res] -= cost[res]
 	resources_changed.emit(stocks)
+	
+## 计算地块落地时的额外差价
+func get_placement_penalty(tile_data: TileResourceData, distance: int) -> Dictionary:
+	var penalty = {}
+	
+	# 如果数据为空，或者距离无效/在HQ旁边(距离为0)，则没有额外花费
+	if not tile_data or distance <= 0 or distance >= 999:
+		return penalty
+		
+	# 遍历地块的 distance_penalty 配置，乘以距离
+	for res in tile_data.distance_penalty.keys():
+		var cost_per_step = tile_data.distance_penalty[res]
+		if cost_per_step > 0:
+			penalty[res] = cost_per_step * distance
+			
+	return penalty

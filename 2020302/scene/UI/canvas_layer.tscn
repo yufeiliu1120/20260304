@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://3nqluakori5c" path="res://scene/UI/ResourceBarUI.gd" id="1_jyuir"]
 [ext_resource type="Script" uid="uid://baqvokwta5voh" path="res://scene/UI/TileShop.gd" id="2_iuk4y"]
 [ext_resource type="PackedScene" uid="uid://dl7rgpxnmq3fe" path="res://scene/tile/Road.tscn" id="3_42qj3"]
-[ext_resource type="PackedScene" uid="uid://clyo0jh5xnybv" path="res://scene/tile.tscn" id="4_gwcwi"]
+[ext_resource type="PackedScene" uid="uid://clyo0jh5xnybv" path="res://scene/tile/tile.tscn" id="4_gwcwi"]
+[ext_resource type="PackedScene" uid="uid://cybf8rm14l2tx" path="res://scene/tile/coast.tscn" id="5_g8l82"]
+[ext_resource type="Script" uid="uid://b47h7xfs82smm" path="res://scene/UI/CostPreviewLabel.gd" id="6_fcd7w"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1726276156]
 
@@ -49,3 +51,20 @@ base_cost = {
 "wood": 1
 }
 metadata/_custom_type_script = "uid://baqvokwta5voh"
+
+[node name="tile_shop2" type="Button" parent="Control/VBoxContainer/HBoxContainer2" unique_id=2002569950]
+layout_mode = 2
+text = "Coast"
+script = ExtResource("2_iuk4y")
+tile_scene = ExtResource("5_g8l82")
+base_cost = {
+"food": 0,
+"stone": 0,
+"wood": 0
+}
+metadata/_custom_type_script = "uid://baqvokwta5voh"
+
+[node name="CostPreviewLabel" type="Label" parent="." unique_id=1555869641]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("6_fcd7w")

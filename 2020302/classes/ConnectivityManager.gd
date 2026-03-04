@@ -1,5 +1,5 @@
 extends Node
-
+class_name Connectivitymanager
 # 哪些地块可以传导连通性
 const CONDUCTIVE_TILES = ["HQ", "Road"]
 
@@ -52,3 +52,25 @@ func check_placement_connectivity(grid_pos: Vector2i, is_hq: bool) -> bool:
 			if n_tile.is_connected and is_conductive(n_tile):
 				return true
 	return false
+	
+	
+func get_min_distance_at(grid_pos: Vector2i, is_hq: bool) -> int:
+	# HQ 本身就是源头，距离永远是 0
+	if is_hq: return 0 
+	
+	var min_dist = 999
+	var neighbors = GridAutoload.get_neighbors(grid_pos)
+	
+	for n_pos in neighbors:
+		if GridAutoload.active_tiles.has(n_pos):
+			var n_tile = GridAutoload.active_tiles[n_pos]
+			# 只有当邻居已连通，且是能传导的地块（Road 或 HQ）时，才能提供距离
+			if n_tile.is_connected and is_conductive(n_tile):
+				if n_tile.distance_to_source < min_dist:
+					min_dist = n_tile.distance_to_source
+	
+	# 如果找到了合法的邻居，自身距离就是最近邻居的距离 + 1
+	if min_dist < 999:
+		return min_dist + 1
+	else:
+		return 999 # 未连通

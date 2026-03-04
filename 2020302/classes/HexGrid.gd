@@ -39,20 +39,24 @@ func can_place_tile(grid_pos: Vector2i, tile_actor: Node2D) -> bool:
 		return false
 	
 	# 2. 物理区域判定：是否在 BuildZone 内
-	# 获取地块上的 Area2D 节点
 	var area = tile_actor
 	var overlapping_areas = area.get_overlapping_areas()
-	
 	var is_in_zone = false
 	for a in overlapping_areas:
-		if a.is_in_group("BuildZone"): # 或者使用 class_name/Group 判定
+		if a.is_in_group("BuildZone"):
 			is_in_zone = true
 			break
-	
 	if not is_in_zone:
 		return false
 
-	# 3. 邻接逻辑判定：如果是第一个地块则跳过，否则必须挨着现有地块
+	# ---------------------------------------------------------
+	# 【核心修改区】
+	
+	# 3. 特权放行：如果地块数据声明了不需要相邻，直接返回允许放置
+	if tile_actor.get("data") and not tile_actor.data.requires_adjacency:
+		return true
+
+	# 4. 常规邻接逻辑判定：如果是第一个地块则跳过，否则必须挨着现有地块
 	if active_tiles.is_empty():
 		return true
 		

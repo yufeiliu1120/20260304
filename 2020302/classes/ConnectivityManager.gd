@@ -36,7 +36,10 @@ func update_connectivity():
 					# 如果邻居也能传导，加入队列继续扩散
 					if is_conductive(neighbor_tile):
 						queue.append(neighbor_tile)
-
+						
+	# 通知全图：连通性刷新完毕，可以检查胜利条件了
+	SignalBusAutoload.map_state_changed.emit()
+	
 func is_conductive(tile: Node) -> bool:
 	if not tile or not tile.data: return false
 	return tile.data.tile_name in CONDUCTIVE_TILES

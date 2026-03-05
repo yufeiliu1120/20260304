@@ -7,7 +7,7 @@ var current_turn: int = 1
 var stocks = {
 	"food": 20,
 	"wood": 10,
-	"stone": 30,
+	"stone": 60,
 	"explorer": 5
 }
 
@@ -60,3 +60,55 @@ func get_placement_penalty(tile_data: TileResourceData, distance: int) -> Dictio
 			penalty[res] = cost_per_step * distance
 			
 	return penalty
+	
+# --- 回合制结算系统 ---
+
+## 执行回合结束结算
+func process_turn() -> void:
+	var turn_production = {
+		"wood": 0, "stone": 0, "food": 0, "explorer": 0, "iron": 0
+	}
+	var turn_food_maintenance = 0
+	
+	# 1. 遍历所有已放置在地图上的地块
+	for tile in GridAutoload.active_tiles.values():
+		# 只有满足工作条件（连了路、未停工）的地块才参与结算
+		if tile.is_working():
+			var data = tile.data as TileResourceData
+			if data:
+				# 累加常规资源产出
+				for res in data.production.keys():
+					if turn_production.has(res):
+						turn_production[res] += data.production[res]
+				
+				# 累加食物的特殊产出与维护费
+				turn_production["food"] += data.food_production
+				turn_food_maintenance += data.food_maintenance
+				
+	# 2. 结算食物及维护费
+	var net_food = turn_production["food"] - turn_food_maintenance
+	
+	# 使用 get() 确保即使 stocks 里没写全键值也不会报错，默认值为 0
+	stocks["food"] = stocks.get("food", 0) + net_food
+	
+	# 食物不足时的简单处理（防跌破0，后续可以加入“罢工”惩罚）
+	if stocks["food"] < 0:
+		print("警告：食物不足以支付维护费，工人饿肚子了！")
+		stocks["food"] = 0
+		
+	# 3. 结算其他资源
+	for res in ["wood", "stone", "explorer", "iron"]:
+		stocks[res] = stocks.get(res, 0) + turn_production[res]
+		
+	# 4. 打印本回合“财报” (方便我们在后台控制台调试)
+	print("\n=== 第 %d 回合结算完毕 ===" % current_turn)
+	print("本回合产出: ", turn_production)
+	print("本回合消耗食物: ", turn_food_maintenance)
+	print("结算后总库存: ", stocks)
+	print("=========================\n")
+	
+	# 5. 回合数增加
+	current_turn += 1
+	
+	# 6. 发送信号，通知顶部 UI 刷新显示的数字
+	resources_changed.emit(stocks)

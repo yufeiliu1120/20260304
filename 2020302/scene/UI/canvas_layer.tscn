@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cybf8rm14l2tx" path="res://scene/tile/coast.tscn" id="5_g8l82"]
 [ext_resource type="Script" uid="uid://b47h7xfs82smm" path="res://scene/UI/CostPreviewLabel.gd" id="6_fcd7w"]
 [ext_resource type="PackedScene" uid="uid://jepyxmi2bx6l" path="res://scene/tile/HQ.tscn" id="6_nnw3a"]
+[ext_resource type="PackedScene" uid="uid://cnhnj8jbcyshb" path="res://scene/tile/forest.tscn" id="7_kwqte"]
 [ext_resource type="Script" uid="uid://blnnikwnypuc1" path="res://scene/UI/tile_context_menu.gd" id="7_ld5ky"]
+[ext_resource type="Script" uid="uid://d3a052b6g15mx" path="res://scene/UI/TurnButton.gd" id="9_53r50"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1726276156]
 
@@ -76,6 +78,18 @@ base_cost = {
 }
 metadata/_custom_type_script = "uid://baqvokwta5voh"
 
+[node name="Forest" type="Button" parent="Control/VBoxContainer/HBoxContainer2" unique_id=121984612]
+layout_mode = 2
+text = "Forest"
+script = ExtResource("2_iuk4y")
+tile_scene = ExtResource("7_kwqte")
+base_cost = {
+"food": 0,
+"stone": 0,
+"wood": 0
+}
+metadata/_custom_type_script = "uid://baqvokwta5voh"
+
 [node name="TileContextMenu" type="PanelContainer" parent="Control" unique_id=1217658987]
 layout_mode = 0
 offset_right = 40.0
@@ -93,6 +107,18 @@ text = "改造"
 [node name="BtnDemolish" type="Button" parent="Control/TileContextMenu/VBoxContainer" unique_id=2111771806]
 layout_mode = 2
 text = "拆除"
+
+[node name="BtnNextTurn" type="Button" parent="Control" unique_id=1181928625]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 336.0
+offset_top = 18.0
+offset_right = -544.0
+offset_bottom = 82.0
+grow_horizontal = 2
+text = "End Turn"
+script = ExtResource("9_53r50")
 
 [node name="CostPreviewLabel" type="Label" parent="." unique_id=1555869641]
 offset_right = 40.0

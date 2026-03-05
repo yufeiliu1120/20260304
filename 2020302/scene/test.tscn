@@ -3,6 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://bb3tsysle1uvt" path="res://assets/floor.png" id="1_5u11y"]
 [ext_resource type="Texture2D" uid="uid://ipt72vxnuga4" path="res://assets/table2.png" id="1_bp0px"]
 [ext_resource type="Script" uid="uid://b4wr4g0d8ipmo" path="res://scene/control_node.gd" id="1_u3ux8"]
+[ext_resource type="Script" uid="uid://cctiv72w3tnui" path="res://classes/map_generator.gd" id="2_1ifl7"]
+[ext_resource type="PackedScene" uid="uid://cybf8rm14l2tx" path="res://scene/tile/coast.tscn" id="3_hngkw"]
+[ext_resource type="PackedScene" uid="uid://djlfxieu3dxmp" path="res://scene/tile/light_house.tscn" id="4_pb23w"]
+[ext_resource type="Script" uid="uid://dbomplbqk4axh" path="res://scene/VictoryManager.gd" id="5_abanw"]
 [ext_resource type="PackedScene" uid="uid://d08ufqbsy3hm7" path="res://scene/UI/canvas_layer.tscn" id="7_pb23w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5u11y"]
@@ -11,6 +15,16 @@ size = Vector2(1106, 560)
 [node name="Node2D" type="Node2D" unique_id=253995382 groups=["ControlNode"]]
 y_sort_enabled = true
 script = ExtResource("1_u3ux8")
+
+[node name="MapGenerator" type="Node" parent="." unique_id=1975245542]
+script = ExtResource("2_1ifl7")
+coast_scene = ExtResource("3_hngkw")
+lighthouse_scene = ExtResource("4_pb23w")
+map_center = Vector2i(9, 4)
+map_radius = 5
+
+[node name="VictoryManager" type="Node" parent="." unique_id=765677060]
+script = ExtResource("5_abanw")
 
 [node name="BuildZone" type="Area2D" parent="." unique_id=958235382 groups=["BuildZone"]]
 z_index = -3
@@ -39,12 +53,3 @@ zoom = Vector2(0.705, 0.705)
 [node name="tiles" type="Node2D" parent="." unique_id=1375518260 groups=["TileStorage"]]
 
 [node name="CanvasLayer" parent="." unique_id=1726276156 instance=ExtResource("7_pb23w")]
-
-[node name="Button" type="Button" parent="CanvasLayer" unique_id=703584882]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 31.0
-grow_horizontal = 2
-text = "Test Connectivity"
-
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

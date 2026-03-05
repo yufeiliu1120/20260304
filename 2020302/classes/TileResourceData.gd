@@ -16,7 +16,8 @@ class_name TileResourceData
 	"wood": 0, "stone": 0, "food": 0
 }
 @export var can_be_upgraded: bool
-
+@export var upgrade_scene: PackedScene 
+## 改造所需的花费
 ## 【新增】距离惩罚：每离总部1格，需要额外消耗的资源。全填0或留空代表不涨价。
 @export var distance_penalty: Dictionary = {
 	"stone": 0,
@@ -35,7 +36,5 @@ class_name TileResourceData
 @export var requires_adjacency: bool = true
 ## 是否可以作为物流锚点（重置建造成本）
 @export var is_anchor: bool = false
-## 升级后的目标数据（用于改造系统）
-@export var upgrade_to: TileResourceData
 ## 是否允许被玩家拆除（自然地块和HQ应设为 false）
 @export var can_be_demolished: bool = true

@@ -75,7 +75,6 @@ func register_tile(grid_pos: Vector2i, tile_instance: Node):
 # 注销地块 (当拖走地块时)
 func unregister_tile(grid_pos: Vector2i):
 	active_tiles.erase(grid_pos)
-
 # 检查某个位置是否已被占用
 func is_position_occupied(grid_pos: Vector2i) -> bool:
 	return active_tiles.has(grid_pos)

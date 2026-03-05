@@ -22,6 +22,11 @@ class_name TileResourceData
 	"stone": 0,
 	"wood": 0
 }
+@export var demolish_refund: Dictionary = {
+	"stone": 0,
+	"wood": 0,
+	"food": 0
+}
 
 @export_group("Logic")
 ## 是否必须连接道路才能工作/放置
@@ -32,3 +37,5 @@ class_name TileResourceData
 @export var is_anchor: bool = false
 ## 升级后的目标数据（用于改造系统）
 @export var upgrade_to: TileResourceData
+## 是否允许被玩家拆除（自然地块和HQ应设为 false）
+@export var can_be_demolished: bool = true

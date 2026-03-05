@@ -1,0 +1,5 @@
+keys,zh,en
+UI_COST_FREE,无额外花费,No Extra Cost
+UI_COST_ADD,+ %d 石头,+ %d Stone
+UI_WARNING_NO_FUNDS,补给运费不足,Insufficient Funds
+UI_WARNING_INVALID_POS,无法放置,Cannot Place

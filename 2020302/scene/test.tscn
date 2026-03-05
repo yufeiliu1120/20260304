@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://bb3tsysle1uvt" path="res://assets/floor.png" id="1_5u11y"]
 [ext_resource type="Texture2D" uid="uid://ipt72vxnuga4" path="res://assets/table2.png" id="1_bp0px"]
 [ext_resource type="Script" uid="uid://b4wr4g0d8ipmo" path="res://scene/control_node.gd" id="1_u3ux8"]
-[ext_resource type="PackedScene" uid="uid://jepyxmi2bx6l" path="res://scene/tile/HQ.tscn" id="4_hngkw"]
 [ext_resource type="PackedScene" uid="uid://d08ufqbsy3hm7" path="res://scene/UI/canvas_layer.tscn" id="7_pb23w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5u11y"]
@@ -38,9 +37,6 @@ position = Vector2(-0.6666667, -20.000011)
 zoom = Vector2(0.705, 0.705)
 
 [node name="tiles" type="Node2D" parent="." unique_id=1375518260 groups=["TileStorage"]]
-
-[node name="Area2D" parent="tiles" unique_id=1488174352 instance=ExtResource("4_hngkw")]
-position = Vector2(468, 162)
 
 [node name="CanvasLayer" parent="." unique_id=1726276156 instance=ExtResource("7_pb23w")]
 

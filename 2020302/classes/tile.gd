@@ -78,6 +78,8 @@ func _on_tile_input_event(_viewport, event, _shape_idx):
 			_try_open_context_menu()
 
 func _try_open_context_menu():
-	# 这里后续会连接到 UI 层
-	# 例如：SignalBus.show_context_menu.emit(self, get_global_mouse_position())
-	print("右键点击了地块: ", data.tile_name if data else "无数据")
+	# 只有当它已经安稳地放在地上（处于 Idle 状态）时，才允许弹出菜单
+	if Statemachine.current_state.state_name == "Idle":
+		# 获取当前鼠标在屏幕上的绝对位置，通知 UI 弹出
+		var mouse_pos = get_viewport().get_mouse_position()
+		SignalBusAutoload.show_tile_menu.emit(self, mouse_pos)

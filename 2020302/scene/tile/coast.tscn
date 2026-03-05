@@ -13,6 +13,7 @@ script = ExtResource("2_vrlli")
 tile_name = "Coast"
 requires_road = false
 requires_adjacency = false
+can_be_demolished = false
 metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
 
 [sub_resource type="Gradient" id="Gradient_vtdo3"]

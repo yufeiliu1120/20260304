@@ -1,19 +1,19 @@
-[gd_scene format=3 uid="uid://dnu7n6324rgx1"]
+[gd_scene format=3 uid="uid://dl5qvhsc0gnh1"]
 
-[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://classes/tile.gd" id="1_17qwj"]
-[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://classes/TileResourceData.gd" id="2_vrlli"]
-[ext_resource type="Texture2D" uid="uid://c5gsccw8d5q0h" path="res://assets/test tile.png" id="3_ktbgh"]
-[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://classes/状态机类.gd" id="4_tgt22"]
-[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://classes/tile_state_idle.gd" id="5_17qwj"]
-[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://classes/tile_state_dragging.gd" id="6_vrlli"]
-[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/main_scene/dust.png" id="7_akkip"]
+[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://classes/tile.gd" id="1_enr1c"]
+[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://classes/TileResourceData.gd" id="2_tx5ck"]
+[ext_resource type="Texture2D" uid="uid://c5gsccw8d5q0h" path="res://assets/test tile.png" id="3_fhokt"]
+[ext_resource type="Texture2D" uid="uid://drtf5rkxglk4j" path="res://assets/HQ tile/base.png" id="4_iowah"]
+[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://classes/状态机类.gd" id="5_gi7er"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://classes/tile_state_idle.gd" id="6_t66ln"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://classes/tile_state_dragging.gd" id="7_6ackq"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/main_scene/dust.png" id="8_0m5l3"]
+[ext_resource type="Texture2D" uid="uid://72chg5y1s5qs" path="res://assets/HQ tile/HQ.png" id="9_2jbeu"]
 
-[sub_resource type="Resource" id="Resource_or6rg"]
-script = ExtResource("2_vrlli")
-tile_name = "Coast"
+[sub_resource type="Resource" id="Resource_doujx"]
+script = ExtResource("2_tx5ck")
+tile_name = "Test"
 requires_road = false
-requires_adjacency = false
-can_be_demolished = false
 metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
 
 [sub_resource type="Gradient" id="Gradient_vtdo3"]
@@ -45,8 +45,8 @@ color_ramp = SubResource("GradientTexture1D_baj2x")
 [node name="Area2D" type="Area2D" unique_id=1488174352]
 y_sort_enabled = true
 collision_mask = 2
-script = ExtResource("1_17qwj")
-data = SubResource("Resource_or6rg")
+script = ExtResource("1_enr1c")
+data = SubResource("Resource_doujx")
 metadata/_edit_horizontal_guides_ = [3.0]
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=2106525632]
@@ -54,41 +54,39 @@ modulate = Color(0, 0, 0, 1)
 self_modulate = Color(1, 1, 1, 0.4392157)
 z_index = -1
 position = Vector2(5, 5)
-texture = ExtResource("3_ktbgh")
+texture = ExtResource("3_fhokt")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=195265445]
+z_index = -1
 position = Vector2(0, 4)
 polygon = PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13, 32, -19)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=364763884]
 y_sort_enabled = true
 position = Vector2(0, 3)
-texture = ExtResource("3_ktbgh")
-
-[node name="Label" type="Label" parent="Sprite2D" unique_id=356761849]
-z_index = 1
-offset_left = -32.0
-offset_top = -14.0
-offset_right = 32.0
-offset_bottom = 9.0
-text = "Coast "
-horizontal_alignment = 1
+texture = ExtResource("4_iowah")
 
 [node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_tgt22")
+script = ExtResource("5_gi7er")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
-script = ExtResource("5_17qwj")
+script = ExtResource("6_t66ln")
 
 [node name="Dragging" type="Node" parent="Statemachine" unique_id=546385578]
-script = ExtResource("6_vrlli")
+script = ExtResource("7_6ackq")
 
 [node name="DustParticles" type="GPUParticles2D" parent="." unique_id=29502924]
 emitting = false
 amount = 20
-texture = ExtResource("7_akkip")
+texture = ExtResource("8_0m5l3")
 lifetime = 0.3
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_617pd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=751481478]
+z_index = 1
+position = Vector2(0, -13)
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("9_2jbeu")

@@ -1,0 +1,363 @@
+[gd_scene format=3 uid="uid://08qkcsu52se5"]
+
+[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://classes/tile.gd" id="1_0omg0"]
+[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://classes/TileResourceData.gd" id="2_kts2b"]
+[ext_resource type="Texture2D" uid="uid://bhfxjk4srvwca" path="res://assets/grass tile/base.png" id="3_aanot"]
+[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://classes/状态机类.gd" id="4_gvdo1"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://classes/tile_state_idle.gd" id="5_kfybt"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://classes/tile_state_dragging.gd" id="6_jfu6m"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/main_scene/dust.png" id="7_jt74j"]
+[ext_resource type="Shader" uid="uid://by65f8ucdav3p" path="res://shader/grass_shader.gdshader" id="8_k3ih7"]
+[ext_resource type="Script" uid="uid://b415r6xbeqscr" path="res://scene/tile/grassland tile/decoration.gd" id="8_kts2b"]
+[ext_resource type="Texture2D" uid="uid://byxu3g6ls01c2" path="res://assets/grass tile/outline.png" id="9_7ofgm"]
+[ext_resource type="Texture2D" uid="uid://b1vy2ai4navrp" path="res://assets/grass tile/grass.png" id="10_m68ry"]
+[ext_resource type="Texture2D" uid="uid://cr4jwtdhdhe2t" path="res://assets/grass tile/rock1.png" id="11_oci0n"]
+[ext_resource type="Texture2D" uid="uid://d1616ug3cnb3q" path="res://assets/grass tile/rock2.png" id="12_nfxya"]
+[ext_resource type="Texture2D" uid="uid://8ow2vdtaou7q" path="res://assets/grass tile/rock3.png" id="13_g2ge5"]
+[ext_resource type="Texture2D" uid="uid://3urt0pe7wqdk" path="res://assets/grass tile/flower.png" id="14_uno84"]
+[ext_resource type="Texture2D" uid="uid://rx1t0imiqdjn" path="res://assets/grass tile/flower2.png" id="15_fab6c"]
+[ext_resource type="Texture2D" uid="uid://b7nod55kodaud" path="res://assets/grass tile/flower3.png" id="16_lpk0y"]
+[ext_resource type="Texture2D" uid="uid://b6xd5xdj3t12o" path="res://assets/grass tile/flower4.png" id="17_nrtld"]
+[ext_resource type="Texture2D" uid="uid://c6owardqnuohq" path="res://assets/grass tile/rabbit Idle.png" id="18_k5vi5"]
+[ext_resource type="Texture2D" uid="uid://1v62f12b8g2p" path="res://assets/grass tile/rabbit shadow.png" id="19_pl3ch"]
+
+[sub_resource type="Resource" id="Resource_doujx"]
+script = ExtResource("2_kts2b")
+tile_name = "Test"
+requires_road = false
+metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g8cxr"]
+load_path = "res://.godot/imported/base.png-2027f40bfcec18fb01a08650940cd7ce.ctex"
+
+[sub_resource type="Gradient" id="Gradient_vtdo3"]
+offsets = PackedFloat32Array(0, 0.5163934, 1)
+colors = PackedColorArray(0.59717613, 0.59717613, 0.5971761, 1, 0.45490196, 0.45490196, 0.45490196, 0.89411765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_baj2x"]
+gradient = SubResource("Gradient_vtdo3")
+
+[sub_resource type="Curve" id="Curve_doujx"]
+_data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.4054054, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpcmr"]
+curve = SubResource("Curve_doujx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_617pd"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+damping_min = 80.0
+damping_max = 120.00001
+scale_curve = SubResource("CurveTexture_fpcmr")
+color_ramp = SubResource("GradientTexture1D_baj2x")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lh58p"]
+shader = ExtResource("8_k3ih7")
+shader_parameter/speed = 2.0
+shader_parameter/min_strength = 0.05
+shader_parameter/max_strength = 0.2
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aayog"]
+shader = ExtResource("8_k3ih7")
+shader_parameter/speed = 1.0
+shader_parameter/min_strength = 0.05
+shader_parameter/max_strength = 0.2
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w0lb0"]
+shader = ExtResource("8_k3ih7")
+shader_parameter/speed = 2.0
+shader_parameter/min_strength = 0.05
+shader_parameter/max_strength = 0.1
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gypqq"]
+atlas = ExtResource("18_k5vi5")
+region = Rect2(0, 0, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nvl1"]
+atlas = ExtResource("18_k5vi5")
+region = Rect2(32, 0, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0fjx"]
+atlas = ExtResource("18_k5vi5")
+region = Rect2(64, 0, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gor7g"]
+atlas = ExtResource("18_k5vi5")
+region = Rect2(96, 0, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3lgv"]
+atlas = ExtResource("18_k5vi5")
+region = Rect2(128, 0, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lh58p"]
+atlas = ExtResource("18_k5vi5")
+region = Rect2(160, 0, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aayog"]
+atlas = ExtResource("18_k5vi5")
+region = Rect2(192, 0, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0lb0"]
+atlas = ExtResource("18_k5vi5")
+region = Rect2(224, 0, 32, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hksal"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gypqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nvl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0fjx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gor7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3lgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lh58p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aayog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0lb0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Area2D" type="Area2D" unique_id=1488174352]
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_0omg0")
+data = SubResource("Resource_doujx")
+metadata/_edit_horizontal_guides_ = [15.0, -12.0]
+metadata/_edit_vertical_guides_ = [-21.0, 20.0]
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=2106525632]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.4392157)
+z_index = -1
+position = Vector2(5, 5)
+texture = SubResource("CompressedTexture2D_g8cxr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=195265445]
+z_index = -1
+position = Vector2(0, 4)
+polygon = PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13, 32, -19)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=364763884]
+y_sort_enabled = true
+position = Vector2(0, 3)
+texture = ExtResource("3_aanot")
+
+[node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_gvdo1")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
+script = ExtResource("5_kfybt")
+
+[node name="Dragging" type="Node" parent="Statemachine" unique_id=546385578]
+script = ExtResource("6_jfu6m")
+
+[node name="DustParticles" type="GPUParticles2D" parent="." unique_id=29502924]
+emitting = false
+amount = 20
+texture = ExtResource("7_jt74j")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_617pd")
+
+[node name="decoration" type="Node2D" parent="." unique_id=1975523022]
+y_sort_enabled = true
+scale = Vector2(0.25, 0.25)
+script = ExtResource("8_kts2b")
+
+[node name="outline" type="Sprite2D" parent="decoration" unique_id=409061559]
+z_index = 1
+material = SubResource("ShaderMaterial_lh58p")
+texture = ExtResource("9_7ofgm")
+
+[node name="grass" type="Node2D" parent="decoration" unique_id=1728209761]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_aayog")
+
+[node name="grass" type="Sprite2D" parent="decoration/grass" unique_id=750346677]
+z_index = 1
+use_parent_material = true
+texture = ExtResource("10_m68ry")
+
+[node name="grass2" type="Sprite2D" parent="decoration/grass" unique_id=400147623]
+z_index = 1
+use_parent_material = true
+position = Vector2(-53.77, 27.485)
+texture = ExtResource("10_m68ry")
+
+[node name="grass3" type="Sprite2D" parent="decoration/grass" unique_id=1573551775]
+z_index = 1
+use_parent_material = true
+position = Vector2(-12.965, 57.855)
+texture = ExtResource("10_m68ry")
+
+[node name="grass4" type="Sprite2D" parent="decoration/grass" unique_id=1441823502]
+z_index = 1
+use_parent_material = true
+position = Vector2(-12.965, 57.855)
+texture = ExtResource("10_m68ry")
+
+[node name="grass5" type="Sprite2D" parent="decoration/grass" unique_id=2127616077]
+z_index = 1
+use_parent_material = true
+position = Vector2(21.635, -55)
+texture = ExtResource("10_m68ry")
+
+[node name="grass6" type="Sprite2D" parent="decoration/grass" unique_id=1472925303]
+z_index = 1
+use_parent_material = true
+position = Vector2(-41.885, -36.22)
+texture = ExtResource("10_m68ry")
+
+[node name="grass7" type="Sprite2D" parent="decoration/grass" unique_id=1216994060]
+z_index = 1
+use_parent_material = true
+position = Vector2(-63.08, -8.125)
+texture = ExtResource("10_m68ry")
+
+[node name="grass8" type="Sprite2D" parent="decoration/grass" unique_id=940145550]
+z_index = 1
+use_parent_material = true
+position = Vector2(65.845, -5.585)
+texture = ExtResource("10_m68ry")
+
+[node name="grass9" type="Sprite2D" parent="decoration/grass" unique_id=181695433]
+z_index = 1
+use_parent_material = true
+position = Vector2(50.53, 33.5)
+texture = ExtResource("10_m68ry")
+
+[node name="grass10" type="Sprite2D" parent="decoration/grass" unique_id=555047253]
+z_index = 1
+use_parent_material = true
+position = Vector2(-30, -60)
+texture = ExtResource("10_m68ry")
+
+[node name="grass11" type="Sprite2D" parent="decoration/grass" unique_id=39349300]
+z_index = 1
+use_parent_material = true
+position = Vector2(65.15, -44.34)
+texture = ExtResource("10_m68ry")
+
+[node name="grass12" type="Sprite2D" parent="decoration/grass" unique_id=678647510]
+z_index = 1
+use_parent_material = true
+position = Vector2(19.35, 49.925)
+texture = ExtResource("10_m68ry")
+
+[node name="rocks" type="Node2D" parent="decoration" unique_id=1543197245]
+
+[node name="rock1" type="Sprite2D" parent="decoration/rocks" unique_id=18522008]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(68, 12)
+texture = ExtResource("11_oci0n")
+
+[node name="rock2" type="Sprite2D" parent="decoration/rocks" unique_id=1007147703]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-64, 52)
+texture = ExtResource("12_nfxya")
+
+[node name="rock3" type="Sprite2D" parent="decoration/rocks" unique_id=1233413102]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-76, -52)
+texture = ExtResource("13_g2ge5")
+
+[node name="flowers" type="Node2D" parent="decoration" unique_id=1351131399]
+material = SubResource("ShaderMaterial_w0lb0")
+
+[node name="flower1" type="Sprite2D" parent="decoration/flowers" unique_id=80074847]
+z_index = 1
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(8, -36)
+texture = ExtResource("14_uno84")
+
+[node name="flower2" type="Sprite2D" parent="decoration/flowers" unique_id=2010768579]
+z_index = 1
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(-88, 40)
+texture = ExtResource("14_uno84")
+
+[node name="flower3" type="Sprite2D" parent="decoration/flowers" unique_id=1649833704]
+z_index = 1
+use_parent_material = true
+position = Vector2(28, -24)
+texture = ExtResource("15_fab6c")
+
+[node name="flower8" type="Sprite2D" parent="decoration/flowers" unique_id=853619080]
+z_index = 1
+use_parent_material = true
+position = Vector2(-16, -80)
+texture = ExtResource("15_fab6c")
+
+[node name="flower6" type="Sprite2D" parent="decoration/flowers" unique_id=1459290145]
+z_index = 1
+use_parent_material = true
+position = Vector2(24, 72)
+texture = ExtResource("15_fab6c")
+
+[node name="flower4" type="Sprite2D" parent="decoration/flowers" unique_id=1778083749]
+z_index = 1
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(0, -88)
+texture = ExtResource("16_lpk0y")
+
+[node name="flower5" type="Sprite2D" parent="decoration/flowers" unique_id=850465703]
+z_index = 1
+use_parent_material = true
+position = Vector2(-8, 24)
+texture = ExtResource("17_nrtld")
+
+[node name="flower7" type="Sprite2D" parent="decoration/flowers" unique_id=850779878]
+z_index = 1
+use_parent_material = true
+position = Vector2(-20, 76)
+texture = ExtResource("17_nrtld")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="decoration" unique_id=51416494]
+z_index = 2
+position = Vector2(84.00001, -36)
+scale = Vector2(0.54, 0.54)
+sprite_frames = SubResource("SpriteFrames_hksal")
+autoplay = "default"
+frame_progress = 0.93846875
+
+[node name="Sprite2D" type="Sprite2D" parent="decoration" unique_id=1713516357]
+self_modulate = Color(1, 1, 1, 0.42745098)
+z_index = 1
+position = Vector2(84, -30)
+scale = Vector2(0.595, 0.595)
+texture = ExtResource("19_pl3ch")

@@ -4,12 +4,69 @@
 [ext_resource type="Script" uid="uid://baqvokwta5voh" path="res://scene/UI/TileShop.gd" id="2_iuk4y"]
 [ext_resource type="PackedScene" uid="uid://dl7rgpxnmq3fe" path="res://scene/tile/Road.tscn" id="3_42qj3"]
 [ext_resource type="PackedScene" uid="uid://clyo0jh5xnybv" path="res://scene/tile/tile.tscn" id="4_gwcwi"]
-[ext_resource type="PackedScene" uid="uid://cybf8rm14l2tx" path="res://scene/tile/coast.tscn" id="5_g8l82"]
+[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://classes/tile.gd" id="5_52dkx"]
+[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://classes/TileResourceData.gd" id="6_b88se"]
 [ext_resource type="Script" uid="uid://b47h7xfs82smm" path="res://scene/UI/CostPreviewLabel.gd" id="6_fcd7w"]
-[ext_resource type="PackedScene" uid="uid://jepyxmi2bx6l" path="res://scene/tile/HQ.tscn" id="6_nnw3a"]
-[ext_resource type="PackedScene" uid="uid://cnhnj8jbcyshb" path="res://scene/tile/forest.tscn" id="7_kwqte"]
+[ext_resource type="PackedScene" uid="uid://bxt1hcfuuw5m8" path="res://scene/tile/forest tile/area_2d.tscn" id="7_10soo"]
 [ext_resource type="Script" uid="uid://blnnikwnypuc1" path="res://scene/UI/tile_context_menu.gd" id="7_ld5ky"]
+[ext_resource type="Texture2D" uid="uid://c5gsccw8d5q0h" path="res://assets/test tile.png" id="7_trrlq"]
+[ext_resource type="PackedScene" uid="uid://08qkcsu52se5" path="res://scene/tile/grassland tile/grassland.tscn" id="8_10soo"]
+[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://classes/状态机类.gd" id="8_y7ei3"]
 [ext_resource type="Script" uid="uid://d3a052b6g15mx" path="res://scene/UI/TurnButton.gd" id="9_53r50"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://classes/tile_state_idle.gd" id="9_gfggp"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://classes/tile_state_dragging.gd" id="10_hpmqw"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/main_scene/dust.png" id="11_3gcib"]
+[ext_resource type="PackedScene" uid="uid://jepyxmi2bx6l" path="res://scene/tile/HQ tile/HQ.tscn" id="12_52dkx"]
+[ext_resource type="PackedScene" uid="uid://c07od86xmqau2" path="res://scene/tile/moutain_tile/moutain_tile.tscn" id="15_0oh35"]
+
+[sub_resource type="Resource" id="Resource_or6rg"]
+script = ExtResource("6_b88se")
+tile_name = "Coast"
+requires_road = false
+requires_adjacency = false
+can_be_demolished = false
+metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
+
+[sub_resource type="Gradient" id="Gradient_vtdo3"]
+offsets = PackedFloat32Array(0, 0.5163934, 1)
+colors = PackedColorArray(0.59717613, 0.59717613, 0.5971761, 1, 0.45490196, 0.45490196, 0.45490196, 0.89411765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_baj2x"]
+gradient = SubResource("Gradient_vtdo3")
+
+[sub_resource type="Curve" id="Curve_doujx"]
+_data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.4054054, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpcmr"]
+curve = SubResource("Curve_doujx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_617pd"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+damping_min = 80.0
+damping_max = 120.00001
+scale_curve = SubResource("CurveTexture_fpcmr")
+color_ramp = SubResource("GradientTexture1D_baj2x")
+
+[sub_resource type="PackedScene" id="PackedScene_44fhd"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("Area2D", "Area2D", "y_sort_enabled", "collision_mask", "script", "data", "metadata/_edit_horizontal_guides_", "Shadow", "Sprite2D", "modulate", "self_modulate", "z_index", "position", "texture", "CollisionPolygon2D", "CollisionPolygon2D", "position", "polygon", "Sprite2D", "Sprite2D", "y_sort_enabled", "position", "texture", "Label", "Label", "z_index", "offset_left", "offset_top", "offset_right", "offset_bottom", "text", "horizontal_alignment", "Statemachine", "Node", "script", "initial_state", "Idle", "Node", "script", "Dragging", "Node", "script", "DustParticles", "GPUParticles2D", "emitting", "amount", "texture", "lifetime", "one_shot", "explosiveness", "process_material"),
+"node_count": 9,
+"node_ids": PackedInt32Array(1488174352, 2106525632, 195265445, 364763884, 356761849, 462783462, 1492686734, 546385578, 29502924),
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("./Sprite2D"), NodePath("."), NodePath("./Statemachine"), NodePath("./Statemachine"), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 5, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 0, 1073741824, 0, 8, 7, -1, 5, 9, 5, 10, 6, 11, 7, 12, 8, 13, 9, 0, 1073741825, 0, 15, 14, -1, 2, 16, 10, 17, 11, 0, 1073741826, 0, 19, 18, -1, 3, 20, 12, 21, 13, 22, 14, 0, 1073741827, 0, 24, 23, -1, 7, 25, 15, 26, 16, 27, 17, 28, 18, 29, 19, 30, 20, 31, 21, 0, 1073741828, 0, 33, 32, -1, 2, 34, 22, 1073741859, 23, 0, 1073741829, 0, 37, 36, -1, 1, 38, 24, 0, 1073741830, 0, 40, 39, -1, 1, 41, 25, 0, 1073741831, 0, 43, 42, -1, 7, 44, 26, 45, 27, 46, 28, 47, 29, 48, 30, 49, 31, 50, 32, 0),
+"variants": [true, 2, ExtResource("5_52dkx"), SubResource("Resource_or6rg"), [3.0], Color(0, 0, 0, 1), Color(1, 1, 1, 0.4392157), -1, Vector2(5, 5), ExtResource("7_trrlq"), Vector2(0, 4), PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13, 32, -19), true, Vector2(0, 3), ExtResource("7_trrlq"), 1, -32.0, -14.0, 32.0, 9.0, "Coast ", 1, ExtResource("8_y7ei3"), NodePath("Idle"), ExtResource("9_gfggp"), ExtResource("10_hpmqw"), false, 20, ExtResource("11_3gcib"), 0.3, true, 0.8, SubResource("ParticleProcessMaterial_617pd")],
+"version": 3
+}
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1726276156]
 
@@ -58,7 +115,7 @@ metadata/_custom_type_script = "uid://baqvokwta5voh"
 layout_mode = 2
 text = "Coast"
 script = ExtResource("2_iuk4y")
-tile_scene = ExtResource("5_g8l82")
+tile_scene = SubResource("PackedScene_44fhd")
 base_cost = {
 "food": 0,
 "stone": 0,
@@ -70,7 +127,7 @@ metadata/_custom_type_script = "uid://baqvokwta5voh"
 layout_mode = 2
 text = "HQ"
 script = ExtResource("2_iuk4y")
-tile_scene = ExtResource("6_nnw3a")
+tile_scene = ExtResource("12_52dkx")
 base_cost = {
 "food": 0,
 "stone": 0,
@@ -82,7 +139,31 @@ metadata/_custom_type_script = "uid://baqvokwta5voh"
 layout_mode = 2
 text = "Forest"
 script = ExtResource("2_iuk4y")
-tile_scene = ExtResource("7_kwqte")
+tile_scene = ExtResource("7_10soo")
+base_cost = {
+"food": 0,
+"stone": 0,
+"wood": 0
+}
+metadata/_custom_type_script = "uid://baqvokwta5voh"
+
+[node name="GrassLand" type="Button" parent="Control/VBoxContainer/HBoxContainer2" unique_id=1601920421]
+layout_mode = 2
+text = "Grass"
+script = ExtResource("2_iuk4y")
+tile_scene = ExtResource("8_10soo")
+base_cost = {
+"food": 0,
+"stone": 0,
+"wood": 0
+}
+metadata/_custom_type_script = "uid://baqvokwta5voh"
+
+[node name="moutain" type="Button" parent="Control/VBoxContainer/HBoxContainer2" unique_id=671162257]
+layout_mode = 2
+text = "Moutain"
+script = ExtResource("2_iuk4y")
+tile_scene = ExtResource("15_0oh35")
 base_cost = {
 "food": 0,
 "stone": 0,
@@ -112,10 +193,10 @@ text = "拆除"
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 336.0
-offset_top = 18.0
-offset_right = -544.0
-offset_bottom = 82.0
+offset_left = 763.0
+offset_top = 27.0
+offset_right = -117.0
+offset_bottom = 91.0
 grow_horizontal = 2
 text = "End Turn"
 script = ExtResource("9_53r50")

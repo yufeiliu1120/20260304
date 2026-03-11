@@ -1,0 +1,365 @@
+[gd_scene format=3 uid="uid://bxt1hcfuuw5m8"]
+
+[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://classes/tile.gd" id="1_2quoo"]
+[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://classes/TileResourceData.gd" id="2_3kb0n"]
+[ext_resource type="Texture2D" uid="uid://cmaccmeum5wby" path="res://assets/forest tile/base.png" id="3_86tgc"]
+[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://classes/状态机类.gd" id="4_yg173"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://classes/tile_state_idle.gd" id="5_eglfn"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://classes/tile_state_dragging.gd" id="6_mbdp2"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/main_scene/dust.png" id="7_jb7af"]
+[ext_resource type="Texture2D" uid="uid://cwhyonerylsgx" path="res://assets/forest tile/rock1.png" id="8_b8rgi"]
+[ext_resource type="Texture2D" uid="uid://x0w805be0br6" path="res://assets/forest tile/tree1.png" id="8_mbdp2"]
+[ext_resource type="Script" uid="uid://8yxxps7v871i" path="res://scene/tile/forest tile/decoration.gd" id="8_ptsms"]
+[ext_resource type="Texture2D" uid="uid://dj7runvy45q83" path="res://assets/forest tile/tree2.png" id="9_jb7af"]
+[ext_resource type="Texture2D" uid="uid://1whmn1rn7wgm" path="res://assets/forest tile/rock2.png" id="9_t8qfi"]
+[ext_resource type="Texture2D" uid="uid://5dfkfbni40mt" path="res://assets/forest tile/tree3.png" id="10_85pf6"]
+[ext_resource type="Texture2D" uid="uid://cgqm0h7me4eru" path="res://assets/forest tile/rock3.png" id="10_ptsms"]
+[ext_resource type="Texture2D" uid="uid://rib2gp8a0x3n" path="res://assets/forest tile/tree4.png" id="11_m0551"]
+[ext_resource type="Shader" uid="uid://by65f8ucdav3p" path="res://shader/grass_shader.gdshader" id="11_v0r5p"]
+[ext_resource type="Texture2D" uid="uid://tm4tio4f6h4b" path="res://assets/forest tile/grass1.png" id="12_8wrn8"]
+[ext_resource type="Texture2D" uid="uid://ces6bkbv8o4i7" path="res://assets/forest tile/tree6.png" id="12_gc1jw"]
+[ext_resource type="Shader" uid="uid://ejajyppql1k0" path="res://shader/tree_shader.gdshader" id="13_8vjkb"]
+[ext_resource type="Texture2D" uid="uid://q4flbigfcaw2" path="res://assets/forest tile/deer.png" id="20_v0r5p"]
+
+[sub_resource type="Resource" id="Resource_doujx"]
+script = ExtResource("2_3kb0n")
+tile_name = "Test"
+requires_road = false
+metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_85pf6"]
+load_path = "res://.godot/imported/test tile.png-852953bb5193aa0ddb4cd04b1c0e61c7.ctex"
+
+[sub_resource type="Gradient" id="Gradient_vtdo3"]
+offsets = PackedFloat32Array(0, 0.5163934, 1)
+colors = PackedColorArray(0.59717613, 0.59717613, 0.5971761, 1, 0.45490196, 0.45490196, 0.45490196, 0.89411765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_baj2x"]
+gradient = SubResource("Gradient_vtdo3")
+
+[sub_resource type="Curve" id="Curve_doujx"]
+_data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.4054054, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpcmr"]
+curve = SubResource("Curve_doujx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_617pd"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+damping_min = 80.0
+damping_max = 120.00001
+scale_curve = SubResource("CurveTexture_fpcmr")
+color_ramp = SubResource("GradientTexture1D_baj2x")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uhhdy"]
+shader = ExtResource("11_v0r5p")
+shader_parameter/speed = 2.0
+shader_parameter/min_strength = 0.05
+shader_parameter/max_strength = 0.2
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i8jl4"]
+shader = ExtResource("13_8vjkb")
+shader_parameter/speed = 1.5490000735775
+shader_parameter/min_strength = 0.06
+shader_parameter/max_strength = 0.1
+shader_parameter/interval = 3.5
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y1h4s"]
+load_path = "res://.godot/imported/tree5.png-a1a99bbd4cad5e3607c063a06ac1b169.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wrn8"]
+atlas = ExtResource("20_v0r5p")
+region = Rect2(0, 0, 23, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vjkb"]
+atlas = ExtResource("20_v0r5p")
+region = Rect2(23, 0, 23, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhhdy"]
+atlas = ExtResource("20_v0r5p")
+region = Rect2(46, 0, 23, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8jl4"]
+atlas = ExtResource("20_v0r5p")
+region = Rect2(69, 0, 23, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6gol"]
+atlas = ExtResource("20_v0r5p")
+region = Rect2(92, 0, 23, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inqqo"]
+atlas = ExtResource("20_v0r5p")
+region = Rect2(115, 0, 23, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knx8o"]
+atlas = ExtResource("20_v0r5p")
+region = Rect2(138, 0, 23, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pf8r3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wrn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vjkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhhdy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8jl4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6gol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inqqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knx8o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Area2D" type="Area2D" unique_id=1488174352]
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_2quoo")
+data = SubResource("Resource_doujx")
+metadata/_edit_horizontal_guides_ = [3.0]
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=2106525632]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.4392157)
+z_index = -1
+position = Vector2(5, 5)
+texture = SubResource("CompressedTexture2D_85pf6")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=195265445]
+z_index = -1
+position = Vector2(0, 4)
+polygon = PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13, 32, -19)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=364763884]
+y_sort_enabled = true
+position = Vector2(0, 3)
+texture = ExtResource("3_86tgc")
+
+[node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_yg173")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
+script = ExtResource("5_eglfn")
+
+[node name="Dragging" type="Node" parent="Statemachine" unique_id=546385578]
+script = ExtResource("6_mbdp2")
+
+[node name="DustParticles" type="GPUParticles2D" parent="." unique_id=29502924]
+emitting = false
+amount = 20
+texture = ExtResource("7_jb7af")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_617pd")
+
+[node name="decoration" type="Node2D" parent="." unique_id=104739268]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("8_ptsms")
+
+[node name="rock1" type="Sprite2D" parent="decoration" unique_id=1917896440]
+position = Vector2(14, 14)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_b8rgi")
+
+[node name="rock2" type="Sprite2D" parent="decoration" unique_id=1754318801]
+position = Vector2(-17, -15)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_t8qfi")
+
+[node name="rock4" type="Sprite2D" parent="decoration" unique_id=693557161]
+position = Vector2(-22, 12)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_t8qfi")
+
+[node name="rock3" type="Sprite2D" parent="decoration" unique_id=1413956120]
+position = Vector2(-12, 18)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_ptsms")
+
+[node name="grass" type="Node2D" parent="decoration" unique_id=1521610396]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_uhhdy")
+
+[node name="grass1" type="Sprite2D" parent="decoration/grass" unique_id=2101402099]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(23, -1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_8wrn8")
+
+[node name="grass4" type="Sprite2D" parent="decoration/grass" unique_id=1554723421]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(-9, 6)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_8wrn8")
+
+[node name="grass5" type="Sprite2D" parent="decoration/grass" unique_id=1391760783]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(2, 8)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_8wrn8")
+
+[node name="grass2" type="Sprite2D" parent="decoration/grass" unique_id=1683619610]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(-8, -15)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_8wrn8")
+
+[node name="grass3" type="Sprite2D" parent="decoration/grass" unique_id=86517160]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(-8, -15)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_8wrn8")
+
+[node name="tree" type="Node2D" parent="decoration" unique_id=39389815]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_i8jl4")
+
+[node name="tree1" type="Sprite2D" parent="decoration/tree" unique_id=1468777920]
+use_parent_material = true
+position = Vector2(-11, -20)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_mbdp2")
+
+[node name="tree17" type="Sprite2D" parent="decoration/tree" unique_id=496462264]
+use_parent_material = true
+position = Vector2(22, -11)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_mbdp2")
+
+[node name="tree14" type="Sprite2D" parent="decoration/tree" unique_id=1657622009]
+use_parent_material = true
+position = Vector2(2, -2)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_mbdp2")
+
+[node name="tree7" type="Sprite2D" parent="decoration/tree" unique_id=52464759]
+use_parent_material = true
+position = Vector2(-22, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_mbdp2")
+
+[node name="tree2" type="Sprite2D" parent="decoration/tree" unique_id=423398727]
+use_parent_material = true
+position = Vector2(-3, -14)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_jb7af")
+
+[node name="tree9" type="Sprite2D" parent="decoration/tree" unique_id=1278930719]
+use_parent_material = true
+position = Vector2(-15, -5)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_jb7af")
+
+[node name="tree3" type="Sprite2D" parent="decoration/tree" unique_id=1992216235]
+use_parent_material = true
+position = Vector2(-4, -24)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_85pf6")
+
+[node name="tree18" type="Sprite2D" parent="decoration/tree" unique_id=2023892206]
+use_parent_material = true
+position = Vector2(20, 6)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_85pf6")
+
+[node name="tree15" type="Sprite2D" parent="decoration/tree" unique_id=274856736]
+use_parent_material = true
+position = Vector2(14, -4)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_85pf6")
+
+[node name="tree8" type="Sprite2D" parent="decoration/tree" unique_id=443727475]
+use_parent_material = true
+position = Vector2(-15, 8)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_85pf6")
+
+[node name="tree4" type="Sprite2D" parent="decoration/tree" unique_id=1720807108]
+use_parent_material = true
+position = Vector2(3, -19)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("11_m0551")
+
+[node name="tree16" type="Sprite2D" parent="decoration/tree" unique_id=769061842]
+use_parent_material = true
+position = Vector2(8, 7)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("11_m0551")
+
+[node name="tree19" type="Sprite2D" parent="decoration/tree" unique_id=154752500]
+use_parent_material = true
+position = Vector2(2, 18)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("11_m0551")
+
+[node name="tree13" type="Sprite2D" parent="decoration/tree" unique_id=83581340]
+use_parent_material = true
+position = Vector2(-4, 9)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("11_m0551")
+
+[node name="tree10" type="Sprite2D" parent="decoration/tree" unique_id=817677495]
+use_parent_material = true
+position = Vector2(-22, -11)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("11_m0551")
+
+[node name="tree5" type="Sprite2D" parent="decoration/tree" unique_id=358560666]
+use_parent_material = true
+position = Vector2(7, -10)
+scale = Vector2(0.25, 0.25)
+texture = SubResource("CompressedTexture2D_y1h4s")
+
+[node name="tree11" type="Sprite2D" parent="decoration/tree" unique_id=349900945]
+use_parent_material = true
+position = Vector2(-7, -3)
+scale = Vector2(0.25, 0.25)
+texture = SubResource("CompressedTexture2D_y1h4s")
+
+[node name="tree6" type="Sprite2D" parent="decoration/tree" unique_id=678040876]
+use_parent_material = true
+position = Vector2(11, -17)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_gc1jw")
+
+[node name="tree12" type="Sprite2D" parent="decoration/tree" unique_id=558469398]
+use_parent_material = true
+position = Vector2(-11, -12)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_gc1jw")
+
+[node name="deer" type="AnimatedSprite2D" parent="decoration" unique_id=2072625750]
+y_sort_enabled = true
+position = Vector2(7, -3)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_pf8r3")
+autoplay = "default"
+frame_progress = 0.71466345

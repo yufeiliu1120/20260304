@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://c5gsccw8d5q0h" path="res://assets/test tile.png" id="3_iedkc"]
 [ext_resource type="PackedScene" uid="uid://mg5q8h3bnqsf" path="res://scene/tile/logging_camp.tscn" id="3_qdukl"]
 [ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://classes/状态机类.gd" id="4_r0j21"]
-[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://scene/tile/tile_state_idle.gd" id="5_ujlxt"]
-[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://scene/tile/tile_state_dragging.gd" id="6_n1g7w"]
-[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/dust.png" id="7_dcjih"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://classes/tile_state_idle.gd" id="6_qdukl"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/main_scene/dust.png" id="7_dcjih"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://classes/tile_state_dragging.gd" id="7_iedkc"]
 
 [sub_resource type="Resource" id="Resource_iti3q"]
 script = ExtResource("2_qdukl")
@@ -86,10 +86,10 @@ script = ExtResource("4_r0j21")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
-script = ExtResource("5_ujlxt")
+script = ExtResource("6_qdukl")
 
 [node name="Dragging" type="Node" parent="Statemachine" unique_id=546385578]
-script = ExtResource("6_n1g7w")
+script = ExtResource("7_iedkc")
 
 [node name="DustParticles" type="GPUParticles2D" parent="." unique_id=29502924]
 emitting = false

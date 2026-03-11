@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://jepyxmi2bx6l"]
+
+[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://classes/tile.gd" id="1_rnfvq"]
+[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://classes/TileResourceData.gd" id="2_nsfyl"]
+[ext_resource type="Texture2D" uid="uid://c5gsccw8d5q0h" path="res://assets/test tile.png" id="3_qk2pw"]
+[ext_resource type="Texture2D" uid="uid://drtf5rkxglk4j" path="res://assets/HQ tile/base.png" id="4_k8f2q"]
+[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://classes/状态机类.gd" id="5_kdqge"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://classes/tile_state_idle.gd" id="6_f6s2e"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://classes/tile_state_dragging.gd" id="7_apafv"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/main_scene/dust.png" id="8_n07qe"]
+[ext_resource type="Texture2D" uid="uid://72chg5y1s5qs" path="res://assets/HQ tile/HQ.png" id="9_ramcj"]
+[ext_resource type="Texture2D" uid="uid://bep2lo2f87sc0" path="res://assets/HQ tile/smoke_particle.png" id="10_nsfyl"]
+
+[sub_resource type="Resource" id="Resource_fpcmr"]
+script = ExtResource("2_nsfyl")
+tile_name = "HQ"
+requires_road = false
+requires_adjacency = false
+can_be_demolished = false
+metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
+
+[sub_resource type="Gradient" id="Gradient_vtdo3"]
+offsets = PackedFloat32Array(0, 0.5163934, 1)
+colors = PackedColorArray(0.59717613, 0.59717613, 0.5971761, 1, 0.45490196, 0.45490196, 0.45490196, 0.89411765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_baj2x"]
+gradient = SubResource("Gradient_vtdo3")
+
+[sub_resource type="Curve" id="Curve_doujx"]
+_data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.4054054, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpcmr"]
+curve = SubResource("Curve_doujx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_617pd"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+damping_min = 80.0
+damping_max = 120.00001
+scale_curve = SubResource("CurveTexture_fpcmr")
+color_ramp = SubResource("GradientTexture1D_baj2x")
+
+[sub_resource type="Gradient" id="Gradient_qk2pw"]
+offsets = PackedFloat32Array(0, 0.63114756, 1)
+colors = PackedColorArray(0.79199904, 0.79199916, 0.7919989, 1, 0.6255971, 0.6255971, 0.62559694, 1, 0.103743516, 0.10374353, 0.103743516, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k8f2q"]
+gradient = SubResource("Gradient_qk2pw")
+
+[sub_resource type="Curve" id="Curve_kdqge"]
+_data = [Vector2(0, 0.1460675), 0.0, 0.0, 0, 0, Vector2(0.5405406, 0.29213488), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_f6s2e"]
+curve = SubResource("Curve_kdqge")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_apafv"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 11.118
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+damping_min = 5.0
+damping_max = 10.0
+scale_curve = SubResource("CurveTexture_f6s2e")
+color_ramp = SubResource("GradientTexture1D_k8f2q")
+
+[node name="Area2D" type="Area2D" unique_id=1488174352]
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_rnfvq")
+data = SubResource("Resource_fpcmr")
+metadata/_edit_horizontal_guides_ = [3.0]
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=2106525632]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.4392157)
+z_index = -1
+position = Vector2(5, 5)
+texture = ExtResource("3_qk2pw")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=195265445]
+position = Vector2(0, 4)
+polygon = PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13, 32, -19)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=364763884]
+y_sort_enabled = true
+position = Vector2(0, 3)
+texture = ExtResource("4_k8f2q")
+
+[node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_kdqge")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
+script = ExtResource("6_f6s2e")
+
+[node name="Dragging" type="Node" parent="Statemachine" unique_id=546385578]
+script = ExtResource("7_apafv")
+
+[node name="DustParticles" type="GPUParticles2D" parent="." unique_id=29502924]
+emitting = false
+amount = 20
+texture = ExtResource("8_n07qe")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_617pd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=2067816869]
+z_index = 1
+position = Vector2(0, -13)
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("9_ramcj")
+
+[node name="smoke" type="GPUParticles2D" parent="." unique_id=1980648822]
+z_index = 2
+position = Vector2(8, -36)
+amount = 16
+texture = ExtResource("10_nsfyl")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_apafv")

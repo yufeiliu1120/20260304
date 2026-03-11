@@ -1,19 +1,18 @@
-[gd_scene format=3 uid="uid://dnu7n6324rgx1"]
+[gd_scene format=3 uid="uid://djgyun6ro6wiq"]
 
-[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://classes/tile.gd" id="1_17qwj"]
-[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://classes/TileResourceData.gd" id="2_vrlli"]
-[ext_resource type="Texture2D" uid="uid://c5gsccw8d5q0h" path="res://assets/test tile.png" id="3_ktbgh"]
-[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://classes/状态机类.gd" id="4_tgt22"]
-[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://classes/tile_state_idle.gd" id="5_17qwj"]
-[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://classes/tile_state_dragging.gd" id="6_vrlli"]
-[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/main_scene/dust.png" id="7_akkip"]
+[ext_resource type="Script" uid="uid://dm7pfbfsror7" path="res://classes/tile.gd" id="1_qiw4j"]
+[ext_resource type="Script" uid="uid://pyx4jcwqtaeg" path="res://classes/TileResourceData.gd" id="2_pj2sr"]
+[ext_resource type="Texture2D" uid="uid://c5gsccw8d5q0h" path="res://assets/test tile.png" id="3_efrh4"]
+[ext_resource type="Texture2D" uid="uid://cpmf27rnarpyp" path="res://assets/coast tile/tiles.png" id="4_wvmdq"]
+[ext_resource type="Script" uid="uid://b0cj422nxrsiq" path="res://classes/状态机类.gd" id="6_pgwag"]
+[ext_resource type="Script" uid="uid://b2lan3bk604tw" path="res://classes/tile_state_idle.gd" id="7_r4cak"]
+[ext_resource type="Script" uid="uid://duqyfxikldmw3" path="res://classes/tile_state_dragging.gd" id="8_xj7iq"]
+[ext_resource type="Texture2D" uid="uid://bmlxrnbnl62jj" path="res://assets/main_scene/dust.png" id="9_8wgg5"]
 
-[sub_resource type="Resource" id="Resource_or6rg"]
-script = ExtResource("2_vrlli")
-tile_name = "Coast"
+[sub_resource type="Resource" id="Resource_doujx"]
+script = ExtResource("2_pj2sr")
+tile_name = "Test"
 requires_road = false
-requires_adjacency = false
-can_be_demolished = false
 metadata/_custom_type_script = "uid://pyx4jcwqtaeg"
 
 [sub_resource type="Gradient" id="Gradient_vtdo3"]
@@ -45,8 +44,8 @@ color_ramp = SubResource("GradientTexture1D_baj2x")
 [node name="Area2D" type="Area2D" unique_id=1488174352]
 y_sort_enabled = true
 collision_mask = 2
-script = ExtResource("1_17qwj")
-data = SubResource("Resource_or6rg")
+script = ExtResource("1_qiw4j")
+data = SubResource("Resource_doujx")
 metadata/_edit_horizontal_guides_ = [3.0]
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=2106525632]
@@ -54,40 +53,34 @@ modulate = Color(0, 0, 0, 1)
 self_modulate = Color(1, 1, 1, 0.4392157)
 z_index = -1
 position = Vector2(5, 5)
-texture = ExtResource("3_ktbgh")
+texture = ExtResource("3_efrh4")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=195265445]
+z_index = -1
 position = Vector2(0, 4)
 polygon = PackedVector2Array(0, -35, -21, -25, -32, -19, -32, 13, 0, 29, 32, 13, 32, -19)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=364763884]
 y_sort_enabled = true
 position = Vector2(0, 3)
-texture = ExtResource("3_ktbgh")
-
-[node name="Label" type="Label" parent="Sprite2D" unique_id=356761849]
-z_index = 1
-offset_left = -32.0
-offset_top = -14.0
-offset_right = 32.0
-offset_bottom = 9.0
-text = "Coast "
-horizontal_alignment = 1
+texture = ExtResource("4_wvmdq")
+hframes = 4
+vframes = 3
 
 [node name="Statemachine" type="Node" parent="." unique_id=462783462 node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_tgt22")
+script = ExtResource("6_pgwag")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="Statemachine" unique_id=1492686734]
-script = ExtResource("5_17qwj")
+script = ExtResource("7_r4cak")
 
 [node name="Dragging" type="Node" parent="Statemachine" unique_id=546385578]
-script = ExtResource("6_vrlli")
+script = ExtResource("8_xj7iq")
 
 [node name="DustParticles" type="GPUParticles2D" parent="." unique_id=29502924]
 emitting = false
 amount = 20
-texture = ExtResource("7_akkip")
+texture = ExtResource("9_8wgg5")
 lifetime = 0.3
 one_shot = true
 explosiveness = 0.8

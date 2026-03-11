@@ -13,3 +13,5 @@ signal hide_tile_menu()
 signal map_state_changed()
 # 游戏胜利时触发，用于 UI 弹出结算画面
 signal game_won(message: String)
+#开场动画结束时，触发这个信号
+signal game_start()
